@@ -1,0 +1,8 @@
+<!doctype html><html><body style="margin:0;background:#000"><canvas id="c"></canvas>
+<script type="module">
+import * as THREE from 'three';
+const r = new THREE.WebGLRenderer({canvas:document.getElementById('c')}); r.setSize(innerWidth,innerHeight);
+const s=new THREE.Scene(); const c=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.1,100); c.position.z=3;
+s.add(new THREE.Mesh(new THREE.TorusKnotGeometry(),new THREE.MeshStandardMaterial({color:'orange'}))); s.add(new THREE.DirectionalLight('white',3));
+r.render(s,c); window.__READY__=true;
+</script></body></html>
