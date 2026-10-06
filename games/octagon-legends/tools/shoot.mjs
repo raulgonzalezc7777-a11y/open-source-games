@@ -23,7 +23,9 @@ const page = await browser.newPage({ viewport: { width: w, height: h } });
 const logs = [];
 page.on('console', (m) => logs.push(`[${m.type()}] ${m.text()}`));
 page.on('pageerror', (e) => logs.push(`[pageerror] ${e.message}`));
-await page.goto(`http://localhost:${port}/index.html?${query}`);
+// PAGE env selects the HTML entry (default index.html), e.g. PAGE=tools/preview-ui.html
+const pagePath = (process.env.PAGE || 'index.html').replace(/^\/+/, '');
+await page.goto(`http://localhost:${port}/${pagePath}?${query}`);
 try {
   await page.waitForFunction(() => window.__READY__ === true, null, { timeout: 180000 });
 } catch (e) {
